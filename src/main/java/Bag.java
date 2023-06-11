@@ -14,8 +14,10 @@ public abstract class Bag {
      *       - an array of Strings named contents
      */
 
-
-
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
     /*
      * TODO: Create a constructor that takes two arguments:
@@ -27,7 +29,12 @@ public abstract class Bag {
      * its contents.)
      */
 
-
+    public Bag(String color, int capacity) {
+        this.color = color;
+        this.numberOfContents = 0;
+        this.capacity = capacity;
+        this.contents = new String[capacity];
+    }
 
 
     /*
@@ -38,16 +45,26 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    public String getColor() {
+        return color;
+    }
 
+    public int getNumberOfContents() {
+        return numberOfContents;
+    }
 
+    public int getCapacity() {
+        return capacity;
+    }
 
     /*
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
 
-
-
+    public void setColor(String give_color) {
+        color = give_color;
+    }
 
 
     /*
@@ -61,8 +78,15 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
-
-
+    public boolean addItem(String item_in_bag) {
+        if (this.numberOfContents < this.capacity) {
+            this.contents[numberOfContents] = item_in_bag;
+            this.numberOfContents += 1;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     /**
@@ -76,8 +100,16 @@ public abstract class Bag {
      * @return
      */
 
-
-
+    public String popItem() {
+        if (numberOfContents == 0) {
+            return null;
+        } else {
+            String last_item = this.contents[numberOfContents - 1];
+            this.contents[numberOfContents - 1] = null;
+            numberOfContents -= 1;
+            return last_item;
+        }
+    }
 
 
     /**
@@ -88,6 +120,16 @@ public abstract class Bag {
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
 
+        int capacity = this.capacity;
+
+        this.capacity += n;
+        String[] new_capacity = new String[this.capacity];
+
+        for (int i=0; i < capacity; i++) {
+            new_capacity[i] = contents[i];
+        }
+
+        this.contents = new_capacity;
     }
 
     /**
